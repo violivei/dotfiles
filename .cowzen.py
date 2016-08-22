@@ -19,13 +19,9 @@ print random.choice(''.join([this.d.get(i, i) for i in this.s]).splitlines()[2:]
 # Condensed into a line:
 import sys, random; stdout = sys.stdout; sys.stdout = type('BlackHole', (), {'write': (lambda self, string: '')})(); import this; sys.stdout = stdout; print random.choice(''.join([this.d.get(i, i) for i in this.s]).splitlines()[2:]);
 
-
-
-
 # For the colorful cow run in a shell and pipe to cowsay and lolcat :P
 # python -c "import sys, random; stdout = sys.stdout; sys.stdout = type('BlackHole', (), {'write': (lambda self, string: '')})(); import this; sys.stdout = stdout; print random.choice(''.join([this.d.get(i, i) for i in this.s]).splitlines()[2:]);" | cowsay | lolcat
 
 # cowsay: Likely to be in your distro's repository (e.g. sudo apt-get cowsay)
 # lolcat: It's a Ruby gem. Make sure you have Ruby installed and run gem install lolcat
-
 # Add to .bashrc for ultimate zen-ness

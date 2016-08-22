@@ -25,6 +25,7 @@ function r() { grep "$1" ${@:2} -R . }
 #mkdir and cd
 function mkcd() { mkdir -p "$@" && cd "$_"; }
 
+# sets env vars for currently running docker machine
 function dmset() {
   COUNT=`command docker-machine ls | grep "Running" | wc -l`
   if [[ "${COUNT// /}" == "1" ]]
@@ -43,10 +44,12 @@ function dmset() {
   fi
 }
 
+# starts default docker machine
 function dmstart(){
   command docker-machine start default
 }
 
+# colorize docker ps with grcat
 function docker() {
   case $* in
     ps* ) shift 1; command docker ps "$@" | grcat $HOME/.grc/conf.dockerps ;;
@@ -56,6 +59,7 @@ function docker() {
   esac
 }
 
+#colorize docker machine with grcat
 function docker-machine() {
    case $* in
     ls* ) shift 1; command docker-machine ls "$@" | grcat $HOME/.grc/conf.docker-machinels ;;
@@ -71,8 +75,8 @@ alias cwd='printf "%q\n" "$(pwd)" | pbcopy | echo pwd copied to clipboard'
 
 # Init jenv
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
-
 export JAVA_HOME="$HOME/.jenv/versions/`jenv version-name`"
+# alias for setting java home
 alias jenv_set_java_home='export JAVA_HOME="$HOME/.jenv/versions/`jenv version-name`"'
 
 # loading generic shell colorizer
@@ -82,5 +86,6 @@ alias jenv_set_java_home='export JAVA_HOME="$HOME/.jenv/versions/`jenv version-n
 export NVM_DIR="/Users/rogerio.c.peixoto/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" v
 
-# adds sbin to PATH
-export PATH="/usr/local/sbin:$PATH"
+# loads ruby version manager
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+export PATH="$PATH:$HOME/.rvm/bin" 
