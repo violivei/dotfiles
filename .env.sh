@@ -25,6 +25,10 @@ function r() { grep "$1" ${@:2} -R . }
 #mkdir and cd
 function mkcd() { mkdir -p "$@" && cd "$_"; }
 
+################
+# DOCKER STUFF #
+################
+
 # sets env vars for currently running docker machine
 function dmset() {
   COUNT=`command docker-machine ls | grep "Running" | wc -l`
@@ -68,6 +72,16 @@ function docker-machine() {
 }
 
 alias dmls='docker-machine ls'
+
+#######################
+# END OF DOCKER STUFF #
+#######################
+
+# replaces spaces in file name with dash (-)
+function strip-spaces() {
+  stripped=echo $1 | sed 's/ /-/g'
+  mv $1 $stripped
+}
 
 # Aliases
 alias cppcompile='c++ -std=c++11 -stdlib=libc++'
